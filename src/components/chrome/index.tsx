@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
 	AppBar,
+	Collapse,
 	Drawer,
-	IconButton,
+	Icon,
 	List,
 	ListItem,
 	ListItemIcon,
@@ -11,20 +12,21 @@ import {
 	Toolbar,
 	Typography,
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import PeopleIcon from '@material-ui/icons/People';
-import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
-import TodayIcon from '@material-ui/icons/Today';
-import WorkIcon from '@material-ui/icons/Work';
+// import MenuIcon from '@material-ui/icons/Menu';
+// import PeopleIcon from '@material-ui/icons/People';
+// import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+// import TodayIcon from '@material-ui/icons/Today';
+// import WorkIcon from '@material-ui/icons/Work';
 import styled from 'styled-components';
 
 import { theme } from 'src/components/app/mui-theme';
 
+import { menu, MenuEntry } from './menu';
+
 class Chrome extends React.Component {
 	public state: {
 		drawerOpen: boolean,
-	} = {
-		drawerOpen: false,
+		menuIndexOpen?: number,
 	};
 
 	public constructor(public props: {
@@ -33,22 +35,22 @@ class Chrome extends React.Component {
 	}) {
 		super(props);
 
-		this.state = { drawerOpen: false };
+		this.state = {
+			drawerOpen: false,
+			menuIndexOpen: -1,
+		};
 	}
 
 	public render(): JSX.Element {
 		return (
-			<section className={this.props.className}>
+			<div
+				className={this.props.className}
+			>
 				<AppBar
 					className="ecg-bar"
 					position="static"
 				>
 					<Toolbar>
-						<IconButton
-							onClick={this.onMenuClick}
-						>
-							<MenuIcon />
-						</IconButton>
 						<Typography
 							component="a"
 							variant="h3"
@@ -61,75 +63,80 @@ class Chrome extends React.Component {
 						</Typography>
 					</Toolbar>
 				</AppBar>
-				<div className="ecg-layout">
+				<div
+					className="ecg-layout"
+				>
 					<Drawer
 						variant="permanent"
 						open={this.state.drawerOpen}
 						className={'drawer ' + (this.state.drawerOpen ? 'open' : 'closed')}
 					>
 						<List>
-							<ListItem
-								component={Link}
-								{...{to: '/employees'}}
-							>
-								<ListItemIcon>
-									<PeopleIcon />
-								</ListItemIcon>
-								<ListItemText>Employees</ListItemText>
-							</ListItem>
-							<ListItem
-								component={Link}
-								{...{to: '/projects'}}
-							>
-								<ListItemIcon>
-									<WorkIcon />
-								</ListItemIcon>
-								<ListItemText>Projects</ListItemText>
-							</ListItem>
-							<ListItem
-								component={Link}
-								{...{to: '/holidays'}}
-							>
-								<ListItemIcon>
-									<TodayIcon />
-								</ListItemIcon>
-								<ListItemText>Holidays</ListItemText>
-							</ListItem>
-							<ListItem
-								component={Link}
-								{...{to: '/contractors'}}
-							>
-								<ListItemIcon>
-									<SupervisedUserCircleIcon />
-								</ListItemIcon>
-								<ListItemText>Contractors</ListItemText>
-							</ListItem>
+							{menu.map((entry: MenuEntry, idx: number) =>
+								<ListItem
+									key={entry.label}
+									component={Link}
+									onClick={this.onMenuClick}
+									{...{ to: entry.href }}
+								>
+									<ListItemIcon>
+										<Icon>
+											{entry.icon}
+										</Icon>
+									</ListItemIcon>
+									<ListItemText>
+										{entry.label}
+									</ListItemText>
+									{entry.sub && entry.sub.length
+										?
+										<Collapse
+											in={this.state.menuIndexOpen === idx}
+										>
+											<List>
+												{entry.sub.map((subEntry: MenuEntry) =>
+													<ListItem
+														key={subEntry.label}
+														component={Link}
+														{...{ to: subEntry.href }}
+													>
+														<ListItemIcon>
+															<Icon>
+																{subEntry.icon}
+															</Icon>
+														</ListItemIcon>
+														<ListItemText>
+															{subEntry.label}
+														</ListItemText>
+													</ListItem>
+												)}
+											</List>
+										</Collapse>
+										:
+										null
+									}
+								</ListItem>
+							)}
 						</List>
 					</Drawer>
 					<main>
 						{this.props.children}
 					</main>
 				</div>
-			</section>
+			</div>
 		);
 	}
 
-	private onMenuClick = () => {
+	private onMenuClick = (e: React.MouseEvent<HTMLElement>): void => {
+		console.group();
+		console.log('this', this);
+		console.log('e', e);
+		console.groupEnd();
+
 		this.setState({
-			drawerOpen: !this.state.drawerOpen,
+			drawerOpen: true,
 		});
 	}
 }
-
-// Create some
-// const landscapeMedia = '@media (min-width:0px) and (orientation: landscape)';
-// const largeScreenMedia = `@media (min-width:${theme.breakpoints.values.sm}px)`;
-// const tb: any = theme.mixins.toolbar;
-// const spacerStyles = {
-// 	default: `height: ${tb.minHeight}px;`,
-// 	landscape: `${landscapeMedia} { height: ${tb[landscapeMedia].minHeight}px; }`,
-// 	largeScreen: `${largeScreenMedia} { height: ${tb[largeScreenMedia].minHeight}px; }`,
-// };
 
 const StyledChrome = styled(Chrome)`
 	height: 100%;
