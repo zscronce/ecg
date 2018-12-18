@@ -60,6 +60,10 @@ const StyledChrome = styled(Chrome)`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	
+	.thin {
+		font-weight: 200;
+	}
 
 	.ecg-bar {
 		z-index: ${theme.zIndex.drawer + 1};
