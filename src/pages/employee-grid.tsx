@@ -6,7 +6,7 @@ export class EmployeeGridPage extends React.Component {
 		super(props);
 	}
 
-	render(): JSX.Element {
+	public render(): JSX.Element {
 		return (
 			<EmployeeGrid />
 		);
