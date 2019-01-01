@@ -26,8 +26,8 @@ export class LoginComponent extends React.Component {
 	render() {
 		return (
 			<div {...this.props}>
-				<TextField fullWidth type="text" name="username" label="Username" autoFocus />
-				<TextField fullWidth type="password" name="password" label="Password" />
+				<TextField fullWidth type="text" name="username" label="Username" autoFocus/>
+				<TextField fullWidth type="password" name="password" label="Password"/>
 				<Button fullWidth color="primary">Log In</Button>
 				<div>or...</div>
 				<GoogleLogin

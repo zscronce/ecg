@@ -26,7 +26,7 @@ ReactDOM.render(
 		<App>
 			<BrowserRouter>
 				<Chrome>
-					<Routing />
+					<Routing/>
 				</Chrome>
 			</BrowserRouter>
 		</App>

@@ -1,11 +1,6 @@
 import React from 'react';
 
-import {
-	newYearsDay,
-	independenceDay,
-	veteransDay,
-	christmasDay,
-} from 'src/debug/example-holidays';
+import { christmasDay, independenceDay, newYearsDay, veteransDay } from 'src/debug/example-holidays';
 import { StaticHoliday } from 'src/models/holiday';
 import { StaticHolidayGrid } from 'src/components/grid/model-types/holiday';
 

@@ -39,6 +39,48 @@ export class GridRow<T> extends React.Component {
 		this.onInputChange = this.onInputChange.bind(this);
 	}
 
+	public render(): JSX.Element {
+		return (
+			<TableRow>
+				<TableCell variant="head">
+					<Typography noWrap>
+						{this.state.editing
+							?
+							<>
+								<IconButton onClick={this.onClickSave}>
+									<SaveIcon/>
+								</IconButton>
+								<IconButton onClick={this.onClickCancel}>
+									<CancelIcon/>
+								</IconButton>
+							</>
+							:
+							<>
+								<IconButton onClick={this.onClickEdit}>
+									<EditIcon/>
+								</IconButton>
+								<IconButton onClick={this.onClickDelete}>
+									<DeleteIcon/>
+								</IconButton>
+							</>
+						}
+					</Typography>
+				</TableCell>
+				{this.props.columns.map((col: GridColumn) =>
+					<GridCell
+						key={col.key}
+						column={col}
+						editing={this.state.editing && col.editable}
+						datum={this.state.editing && col.editable
+							? this.state.editing[col.key]
+							: this.props.data[col.key]}
+						onChange={(val: any) => this.onInputChange(col.key, val)}
+					/>,
+				)}
+			</TableRow>
+		);
+	}
+
 	private onClickEdit(): void {
 		this.setState({
 			editing: cloneClassObject(this.props.data as T & { constructor: { new(): T } }),
@@ -80,46 +122,5 @@ export class GridRow<T> extends React.Component {
 
 		// Make sure react sees the above changes
 		this.setState({ editing, edits });
-	}
-
-	public render(): JSX.Element {
-		return (
-			<TableRow>
-				<TableCell variant="head">
-					<Typography noWrap>
-						{this.state.editing ?
-							<>
-								<IconButton onClick={this.onClickSave}>
-									<SaveIcon />
-								</IconButton>
-								<IconButton onClick={this.onClickCancel}>
-									<CancelIcon />
-								</IconButton>
-							</>
-							:
-							<>
-								<IconButton onClick={this.onClickEdit}>
-									<EditIcon />
-								</IconButton>
-								<IconButton onClick={this.onClickDelete}>
-									<DeleteIcon />
-								</IconButton>
-							</>
-						}
-					</Typography>
-				</TableCell>
-				{this.props.columns.map((col: GridColumn) =>
-					<GridCell
-						key={col.key}
-						column={col}
-						editing={this.state.editing && col.editable}
-						datum={this.state.editing && col.editable
-							? this.state.editing[col.key]
-							: this.props.data[col.key]}
-						onChange={(val: any) => this.onInputChange(col.key, val)}
-					/>
-				)}
-			</TableRow>
-		);
 	}
 }

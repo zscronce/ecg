@@ -1,22 +1,19 @@
-import {
-	addDays,
-	getDay,
-	isSaturday,
-	isSunday,
-	subDays,
-} from 'date-fns';
+import { addDays, getDay, isSaturday, isSunday, subDays } from 'date-fns';
 
 import { DayOfWeek } from './day-of-week';
 import { Month } from './month';
 
-export type DayOfMonth = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13
-	| 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28
-	| 29 | 30 | 31;
+export type DayOfMonth = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+	| 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20
+	| 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30
+	| 31;
 
 export interface Holiday {
-	dateIn(year: number): Date;
-	observedIn(year: number): Date;
 	description: string;
+
+	dateIn(year: number): Date;
+
+	observedIn(year: number): Date;
 }
 
 export class StaticHoliday implements Holiday {
@@ -45,7 +42,7 @@ export class StaticHoliday implements Holiday {
 }
 
 export class FloatingHoliday implements Holiday {
-	constructor (
+	constructor(
 		public description: string,
 		public rangeStart: DayOfMonth,
 		public day: DayOfWeek,

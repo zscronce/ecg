@@ -11,7 +11,7 @@ export class ProjectGridPage extends React.Component {
 
 	render(): JSX.Element {
 		return (
-			<ProjectGrid projects={exampleProjects} />
+			<ProjectGrid projects={exampleProjects}/>
 		);
 	}
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Contractor } from 'src/models/contractor';
 import { currencyFormatter, dateFormatter, Grid, GridColumn } from 'src/components/grid';
-import { LaborType } from 'src/models/labor-type';
+import { LaborTypeEnum } from 'src/models/primitive/labor-type';
 
 export class ContractorGrid extends React.Component {
 	public static COLUMNS: GridColumn[] = [
@@ -21,8 +21,8 @@ export class ContractorGrid extends React.Component {
 			label: 'Labor Type',
 			type: 'select',
 			selectOptions: [
-				LaborType.DIRECT,
-				LaborType.INDIRECT,
+				LaborTypeEnum.Direct,
+				LaborTypeEnum.Indirect,
 			],
 		}),
 		new GridColumn({

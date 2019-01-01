@@ -1,4 +1,5 @@
-import { LaborType } from 'src/models/labor-type';
+import { LaborType } from 'src/models/primitive/labor-type';
+import { PrimitiveKey } from './primitive';
 
 export class Contractor {
 	public id: string;
@@ -11,13 +12,13 @@ export class Contractor {
 		id: string,
 		hireDate?: Date,
 		type?: string,
-		laborType?: LaborType,
+		laborType?: keyof LaborType,
 		hourlyRate?: number,
 	}) {
 		const argsDefaults = {
 			hireDate: new Date(),
 			type: 'Subcontractor',
-			laborType: LaborType.DIRECT,
+			laborType: LaborType.Direct,
 			hourlyRate: 0,
 		};
 

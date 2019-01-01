@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-	AppBar,
-	Toolbar,
-	Typography,
-} from '@material-ui/core';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import styled from 'styled-components';
 
 import { theme } from 'src/components/app/mui-theme';
@@ -34,7 +30,7 @@ class Chrome extends React.Component {
 							color="inherit"
 							className="logo"
 							noWrap
-							{...{href: '/'}}
+							{...{ href: '/' }}
 						>
 							ECG<span className="thin">INC</span>
 						</Typography>

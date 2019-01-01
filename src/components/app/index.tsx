@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
+import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import styled from 'styled-components';
 
@@ -18,10 +18,9 @@ class App extends React.Component {
 	}
 
 	render(): JSX.Element {
-		console.log((this.props as any).classes);
 		return (
 			<MuiThemeProvider theme={theme}>
-				<CssBaseline />
+				<CssBaseline/>
 				<MuiPickersUtilsProvider utils={DatePickerUtils}>
 					<div className={this.props.className}>
 						{this.props.children}

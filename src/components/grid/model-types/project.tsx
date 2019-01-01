@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { ExpenseType } from 'src/models/expense-type';
+import { ExpenseType } from 'src/models/primitive/expense-type';
 import { Grid } from 'src/components/grid';
 import { GridColumn } from 'src/components/grid/column';
 import { Project } from 'src/models/project';
-import { ProjectType } from 'src/models/project-type';
+import { ProjectType } from 'src/models/primitive/project-type';
 
 export class ProjectGrid extends React.Component {
 	public static COLUMNS: GridColumn[] = [
@@ -17,10 +17,10 @@ export class ProjectGrid extends React.Component {
 			label: 'Type',
 			type: 'select',
 			selectOptions: [
-				ProjectType.PROJECT,
+				ProjectType.Project,
 				ProjectType.PTO,
-				ProjectType.HOLIDAY,
-				ProjectType.FOUR01K,
+				ProjectType.Holiday,
+				ProjectType['401K'],
 			],
 		}),
 		new GridColumn({
@@ -29,8 +29,8 @@ export class ProjectGrid extends React.Component {
 			type: 'select',
 			selectOptions: [
 				ExpenseType.DL,
-				ExpenseType.FRINGE,
-				ExpenseType.GNA,
+				ExpenseType.Fringe,
+				ExpenseType['G&A'],
 				ExpenseType.OH,
 			],
 		}),

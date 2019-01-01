@@ -12,7 +12,7 @@ class LoginPage extends React.Component {
 	public render(): JSX.Element {
 		return (
 			<Card {...this.props}>
-				<LoginComponent />
+				<LoginComponent/>
 			</Card>
 		);
 	}

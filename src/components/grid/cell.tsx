@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-	Checkbox,
-	InputAdornment,
-	MenuItem,
-	Switch,
-	TableCell,
-	TextField,
-} from '@material-ui/core';
+import { Checkbox, InputAdornment, MenuItem, Switch, TableCell, TextField } from '@material-ui/core';
 import { DatePicker } from 'material-ui-pickers';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
@@ -53,12 +46,12 @@ export class GridCell extends React.Component {
 		switch (this.props.column.type) {
 			case 'checkbox':
 				return this.props.datum
-					? <CheckBoxIcon />
-					: <CheckBoxOutlineBlankIcon />;
+					? <CheckBoxIcon/>
+					: <CheckBoxOutlineBlankIcon/>;
 			case 'switch':
 				return this.props.datum
-					? <ToggleOnIcon />
-					: <ToggleOffIcon />;
+					? <ToggleOnIcon/>
+					: <ToggleOffIcon/>;
 			default:
 				return <>{this.getCellText()}</>;
 		}
@@ -84,13 +77,13 @@ export class GridCell extends React.Component {
 
 	private renderEditCheckbox(): JSX.Element {
 		return (
-			<Checkbox checked={this.props.datum} onChange={this.onBooleanChange} />
+			<Checkbox checked={this.props.datum} onChange={this.onBooleanChange}/>
 		);
 	}
 
 	private renderEditSwitch(): JSX.Element {
 		return (
-			<Switch checked={this.props.datum} onChange={this.onBooleanChange} />
+			<Switch checked={this.props.datum} onChange={this.onBooleanChange}/>
 		);
 	}
 
@@ -121,7 +114,7 @@ export class GridCell extends React.Component {
 						value={normalizedOptions.get(display)}
 					>
 						{display}
-					</MenuItem>
+					</MenuItem>,
 				)}
 			</TextField>
 		);
@@ -136,7 +129,7 @@ export class GridCell extends React.Component {
 				fullWidth
 				margin="dense"
 				InputProps={{
-					startAdornment: <InputAdornment position="start">$</InputAdornment>
+					startAdornment: <InputAdornment position="start">$</InputAdornment>,
 				}}
 			/>
 		);
@@ -192,9 +185,10 @@ export class GridCell extends React.Component {
 					(opt: string) => normalizedOptions.set(opt, opt),
 				);
 			} else if (options instanceof Object) {
-				Object.getOwnPropertyNames(options).forEach(
-					(key: string) => normalizedOptions.set(key, options[key]),
-				);
+				Object.getOwnPropertyNames(options)
+					.forEach(
+						(key: string) => normalizedOptions.set(key, options[key]),
+					);
 			} else {
 				const methodName: string = `${GridCell.name}::getNormalizedSelectOptions()`;
 				const errorMessage: string = 'this.props.column.selectOptions is not valid';

@@ -1,5 +1,5 @@
-import { ProjectType } from './project-type';
-import { ExpenseType } from './expense-type';
+import { ProjectType } from './primitive/project-type';
+import { ExpenseType } from './primitive/expense-type';
 
 export class Project {
 	public id: string;
@@ -7,9 +7,9 @@ export class Project {
 	public expenseType: ExpenseType;
 
 	constructor(args?: {
-		id: string,
-		type: ProjectType,
-		expenseType: ExpenseType,
+		id?: string,
+		type?: ProjectType,
+		expenseType?: ExpenseType,
 	}) {
 		Object.assign(this, args);
 	}

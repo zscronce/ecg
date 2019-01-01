@@ -8,7 +8,7 @@ export class EmployeeGridPage extends React.Component {
 
 	public render(): JSX.Element {
 		return (
-			<EmployeeGrid />
+			<EmployeeGrid/>
 		);
 	}
 }

@@ -9,14 +9,6 @@
  * @property {{[name: string]: any}} [selectOptions]
  */
 export class GridColumn {
-	public static DEFAULT_FORMATTER = function(value: any): string {
-		try {
-			return value.toString();
-		} catch (e) {
-			return '';
-		}
-	};
-
 	public key: string = '';
 	public type: string = 'text';
 	public label: string = '';
@@ -42,4 +34,12 @@ export class GridColumn {
 	public get isNumeric(): boolean {
 		return this.type === 'number' || this.type === 'currency';
 	}
+
+	public static DEFAULT_FORMATTER = function(value: any): string {
+		try {
+			return value.toString();
+		} catch (e) {
+			return '';
+		}
+	};
 }

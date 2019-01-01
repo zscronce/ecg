@@ -10,7 +10,7 @@ export class ContractorGridPage extends React.Component {
 
 	public render(): JSX.Element {
 		return (
-			<ContractorGrid contractors={exampleContractors} />
+			<ContractorGrid contractors={exampleContractors}/>
 		);
 	}
 }

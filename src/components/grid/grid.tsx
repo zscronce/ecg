@@ -31,7 +31,9 @@ class Grid extends React.Component {
 							<IconButton
 								onClick={this.props.onAdd}
 							>
-								{this.props.addIcon ? React.createElement(this.props.addIcon) : <AddCircleIcon />}
+								{this.props.addIcon
+									? React.createElement(this.props.addIcon)
+									: <AddCircleIcon/>}
 							</IconButton>
 						</TableCell>
 						{this.props.columns.map((col: GridColumn) =>
@@ -41,7 +43,7 @@ class Grid extends React.Component {
 								numeric={col.isNumeric}
 							>
 								{col.label}
-							</TableCell>
+							</TableCell>,
 						)}
 					</TableRow>
 				</TableHead>
@@ -53,7 +55,7 @@ class Grid extends React.Component {
 							columns={this.props.columns}
 							onCommit={this.props.onChange}
 							onDelete={this.props.onDelete}
-						/>
+						/>,
 					)}
 				</TableBody>
 			</Table>

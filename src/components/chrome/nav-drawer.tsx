@@ -39,18 +39,22 @@ class NavDrawer extends React.Component {
 	}
 
 	public render(): JSX.Element {
-		const {className, dense} = this.props;
-		const {open, openIndeces} = this.state;
+		const { className, dense } = this.props;
+		const { open, openIndeces } = this.state;
 
-		const getDrawerClass = () => (className || '') + (this.state.open ? ' open' : '');
-		const getMenuToggleClass = (idx: number) => 'expand' + (this.state.openIndeces.has(idx) ? ' open' : '');
+		const getDrawerClass = () => (className || '') + (this.state.open
+			? ' open'
+			: '');
+		const getMenuToggleClass = (idx: number) => 'expand' + (this.state.openIndeces.has(idx)
+			? ' open'
+			: '');
 
 		return (
 			<Drawer
 				variant="permanent"
 				open={open}
 				className={getDrawerClass()}
-				PaperProps={{className: 'paper', elevation: 4}}
+				PaperProps={{ className: 'paper', elevation: 4 }}
 			>
 				<List
 					component="nav"
@@ -70,7 +74,7 @@ class NavDrawer extends React.Component {
 								</ListItemIcon>
 								<ListItemText
 									primary={group.label}
-									primaryTypographyProps={{noWrap: true}}
+									primaryTypographyProps={{ noWrap: true }}
 								/>
 								{group.sub.length
 									?
@@ -95,7 +99,7 @@ class NavDrawer extends React.Component {
 												component={Link}
 												className="sublist"
 												selected={link.href === window.location.pathname}
-												{...{to: link.href}}
+												{...{ to: link.href }}
 											>
 												<ListItemIcon>
 													<Icon>
@@ -104,16 +108,16 @@ class NavDrawer extends React.Component {
 												</ListItemIcon>
 												<ListItemText
 													primary={link.label}
-													primaryTypographyProps={{noWrap: true}}
+													primaryTypographyProps={{ noWrap: true }}
 												/>
-											</ListItem>
+											</ListItem>,
 										)}
 									</List>
 								</Collapse>
 								:
 								null
 							}
-						</>
+						</>,
 					)}
 				</List>
 				{this.state.open
@@ -126,7 +130,7 @@ class NavDrawer extends React.Component {
 							onClick={this.closeMenu}
 							className="close"
 						>
-							<ChevronLeftIcon />
+							<ChevronLeftIcon/>
 						</IconButton>
 					</Tooltip>
 					:
@@ -152,7 +156,7 @@ class NavDrawer extends React.Component {
 		});
 	};
 
-	private closeMenu = (): void => this.setState({open: false, openIndeces: new Set<number>()});
+	private closeMenu = (): void => this.setState({ open: false, openIndeces: new Set<number>() });
 }
 
 const StyledNavDrawer = styled(NavDrawer)`
