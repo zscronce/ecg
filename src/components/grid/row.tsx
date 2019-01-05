@@ -31,12 +31,6 @@ export class GridRow<T> extends React.Component {
 			editing: null,
 			edits: [],
 		};
-
-		this.onClickEdit = this.onClickEdit.bind(this);
-		this.onClickDelete = this.onClickDelete.bind(this);
-		this.onClickSave = this.onClickSave.bind(this);
-		this.onClickCancel = this.onClickCancel.bind(this);
-		this.onInputChange = this.onInputChange.bind(this);
 	}
 
 	public render(): JSX.Element {
@@ -81,39 +75,38 @@ export class GridRow<T> extends React.Component {
 		);
 	}
 
-	private onClickEdit(): void {
+	private readonly onClickEdit = (): void => {
 		this.setState({
 			editing: cloneClassObject(this.props.data as T & { constructor: { new(): T } }),
 			edits: [],
 		});
-	}
+	};
 
-	private onClickDelete(): void {
+	private readonly onClickDelete = (): void => {
 		if (this.props.onDelete) {
 			this.props.onDelete(this.props.data);
 		}
-	}
+	};
 
-	private onClickSave(): void {
+	private readonly onClickSave = (): void => {
 		this.state.edits.forEach(
 			(edit: { propName: string, value: any }) => this.props.data[edit.propName] = edit.value,
 		);
 
-		this.exitEditMode();
-	}
-
-	private onClickCancel(): void {
-		this.exitEditMode();
-	}
-
-	private exitEditMode(): void {
 		this.setState({
 			editing: null,
 			edits: null,
 		});
-	}
+	};
 
-	private onInputChange(propName: string, value: any): void {
+	private readonly onClickCancel = (): void => {
+		this.setState({
+			editing: null,
+			edits: null,
+		});
+	};
+
+	private readonly onInputChange = (propName: string, value: any): void => {
 		const editing = this.state.editing;
 		editing[propName] = value;
 
@@ -122,5 +115,5 @@ export class GridRow<T> extends React.Component {
 
 		// Make sure react sees the above changes
 		this.setState({ editing, edits });
-	}
+	};
 }

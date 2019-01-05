@@ -1,10 +1,8 @@
 import { Primitive } from './';
 
-export enum ExpenseType {
-	DL = 'DL',
-	Fringe = 'Fringe',
-	'G&A' = 'G&A',
-	OH = 'OH',
+export class ExpenseType extends Primitive {
+	static dl = new ExpenseType('dl', 'DL');
+	static fringe = new ExpenseType('fringe', 'Fringe');
+	static ga = new ExpenseType('ga', 'G&A');
+	static oh = new ExpenseType('oh', 'G&A');
 }
-
-export const expenseTypePrimitive = new Primitive(ExpenseType, 'epense-type');

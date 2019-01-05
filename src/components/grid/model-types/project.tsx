@@ -17,9 +17,9 @@ export class ProjectGrid extends React.Component {
 			label: 'Type',
 			type: 'select',
 			selectOptions: [
-				ProjectType.Project,
-				ProjectType.PTO,
-				ProjectType.Holiday,
+				ProjectType.project,
+				ProjectType.pto,
+				ProjectType.holiday,
 				ProjectType['401K'],
 			],
 		}),
@@ -28,10 +28,10 @@ export class ProjectGrid extends React.Component {
 			label: 'Expense Type',
 			type: 'select',
 			selectOptions: [
-				ExpenseType.DL,
-				ExpenseType.Fringe,
+				ExpenseType.dl,
+				ExpenseType.fringe,
 				ExpenseType['G&A'],
-				ExpenseType.OH,
+				ExpenseType.oh,
 			],
 		}),
 	];

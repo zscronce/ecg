@@ -1,10 +1,8 @@
 import { Primitive } from './';
 
-export enum ProjectType {
-	Project = 'Project',
-	PTO = 'PTO',
-	Holiday = 'Holiday',
-	'401K' = '401K',
+export class ProjectType extends Primitive {
+	static project = new Primitive('project', 'Project', 'From a Project');
+	static pto = new Primitive('pto', 'PTO', 'When employees say "fuck it"');
+	static holiday = new Primitive('holiday', 'Holiday', 'When the government says "fuck it"');
+	static f01K = new Primitive('401K', '401k', 'Law 401, Section K');
 }
-
-export const projectPrimitive = new Primitive(ProjectType, 'project-type');

@@ -1,8 +1,15 @@
 import { Primitive } from './';
 
-export enum LaborType {
-	Direct = 'Labor involved in the hands-on production of goods and services',
-	Indirect = 'Any non-direct labor',
-}
+export class LaborType extends Primitive {
+	static direct = new LaborType(
+		'direct',
+		'Direct',
+		'Labor involved in the hands-on production of goods and services',
+	);
 
-export const laborTypePrimitive = new Primitive(LaborType, 'labor-type');
+	static indirect = new LaborType(
+		'indirect',
+		'Indirect',
+		'Any non-direct labor',
+	);
+}

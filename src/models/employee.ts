@@ -1,4 +1,4 @@
-import { LaborTypeEnum } from './primitive/labor-type';
+import { LaborType } from './primitive/labor-type';
 import { EmployeeType } from './primitive/employee-type';
 
 export class Employee {
@@ -10,14 +10,14 @@ export class Employee {
 	public id: string = null;
 	public hireDate: Date = null;
 	public empType: EmployeeType = null;
-	public laborType: LaborTypeEnum = null;
+	public laborType: LaborType = null;
 
 	public constructor(
 		args?: {
 			id: string,
 			hireDate?: Date,
 			empType?: EmployeeType,
-			laborType?: LaborTypeEnum,
+			laborType?: LaborType,
 			hourlyRate?: number,
 			hourlyRateWithRaise?: number,
 			salaryRate?: number,

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Employee } from 'src/models/employee';
 import { EmployeeType } from 'src/models/primitive/employee-type';
-import { LaborTypeEnum } from 'src/models/primitive/labor-type';
+import { LaborType } from 'src/models/primitive/labor-type';
 import { Grid, GridColumn } from 'src/components/grid';
 import { currencyFormatter, dateFormatter } from 'src/components/grid/formatters';
 
@@ -24,13 +24,13 @@ export class EmployeeGrid extends React.Component {
 			key: 'empType',
 			label: 'Employee Type',
 			type: 'select',
-			selectOptions: [EmployeeType.Salary, EmployeeType.Hourly],
+			selectOptions: [EmployeeType.salary, EmployeeType.hourly],
 		}),
 		new GridColumn({
 			key: 'laborType',
 			label: 'Labor Type',
 			type: 'select',
-			selectOptions: [LaborTypeEnum.Direct, LaborTypeEnum.Indirect],
+			selectOptions: [LaborType.direct, LaborType.indirect],
 		}),
 		new GridColumn({
 			key: 'hourlyRate',
@@ -92,8 +92,8 @@ export class EmployeeGrid extends React.Component {
 		const e: Employee = new Employee();
 		e.id = '';
 		e.hireDate = new Date();
-		e.empType = EmployeeType.Hourly;
-		e.laborType = LaborTypeEnum.Direct;
+		e.empType = EmployeeType.hourly;
+		e.laborType = LaborType.direct;
 		e.hourlyRate = 0;
 
 		this.state.employees.push(e);

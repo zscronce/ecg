@@ -8,6 +8,7 @@ import { HolidayGridPage } from 'src/pages/holiday-grid';
 import { HomePage } from 'src/pages/home';
 import { LoginPage } from 'src/pages/login';
 import { ProjectGridPage } from 'src/pages/project-grid';
+import { Dashboard } from '@material-ui/icons';
 
 export class Routing extends React.Component {
 	constructor(props: any) {
@@ -24,6 +25,7 @@ export class Routing extends React.Component {
 				<Route exact path="/projects" component={ProjectGridPage}/>
 				<Route exact path="/contractors" component={ContractorGridPage}/>
 				<Route exact path="/epl" component={PrimitivesEditorPage}/>
+				<Route exact path="/dashboard" component={Dashboard}/>
 			</>
 		);
 	}
