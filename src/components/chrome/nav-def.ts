@@ -9,7 +9,7 @@ export type NavGroup = NavEntry & {
 	sub: NavLink[],
 };
 
-export const menuDef: NavGroup[] = [
+export const navDef: NavGroup[] = [
 	{
 		label: 'Account',
 		icon: 'account_balance',

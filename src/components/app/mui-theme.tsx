@@ -12,5 +12,3 @@ export const theme = createMuiTheme({
 		useNextVariants: true,
 	},
 });
-
-console.info('Material UI Theme:', theme);

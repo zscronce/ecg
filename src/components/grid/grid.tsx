@@ -63,7 +63,7 @@ class Grid extends React.Component {
 	}
 }
 
-const StyledGrid = styled(Grid)`
+const styledGrid = styled(Grid)`
 	tbody tr td:first-child {
 		text-align: right;
 		white-space: nowrap;
@@ -72,5 +72,5 @@ const StyledGrid = styled(Grid)`
 `;
 
 export {
-	StyledGrid as Grid,
+	styledGrid as Grid,
 };

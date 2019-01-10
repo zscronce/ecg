@@ -7,7 +7,7 @@ import { LaborType } from 'src/models/primitive/labor-type';
 import { ProjectType } from '../models/primitive/project-type';
 
 export class PrimitivesEditorPage extends React.Component {
-	render(): JSX.Element {
+	public render(): JSX.Element {
 		return (
 			<>
 				<PrimitiveList primitive={EmployeeType}/>

@@ -8,22 +8,15 @@ import ToggleOnIcon from '@material-ui/icons/ToggleOn';
 
 import { GridColumn } from './index';
 
-export class GridCell extends React.Component {
-	public constructor(public props: {
-		column: GridColumn,
-		datum: any,
-		editing: boolean,
-		onChange: Function,
-	}) {
-		super(props);
+type GridCellPropTypes = {
+	column: GridColumn,
+	datum: any,
+	editing: boolean,
+	onChange: Function,
+};
 
-		this.onGenericChange = this.onGenericChange.bind(this);
-		this.onBooleanChange = this.onBooleanChange.bind(this);
-		this.onDatePickerChange = this.onDatePickerChange.bind(this);
-		this.getCellText = this.getCellText.bind(this);
-	}
-
-	public render(): JSX.Element {
+export class GridCell extends React.Component<GridCellPropTypes> {
+	public render = (): JSX.Element => {
 		return (
 			<TableCell
 				numeric={this.props.column.isNumeric}
@@ -34,15 +27,13 @@ export class GridCell extends React.Component {
 				}
 			</TableCell>
 		);
-	}
+	};
 
-	private getCellText(): string {
-		return this.props.column.formatter
-			? this.props.column.formatter(this.props.datum)
-			: this.props.datum.toString();
-	}
+	//////////////////////
+	// render() helpers //
+	//////////////////////
 
-	private getCellContents(): JSX.Element {
+	private renderCellContent = (): JSX.Element => {
 		switch (this.props.column.type) {
 			case 'checkbox':
 				return this.props.datum
@@ -55,39 +46,21 @@ export class GridCell extends React.Component {
 			default:
 				return <>{this.getCellText()}</>;
 		}
-	}
+	};
 
-	private onChange(val: any): void {
-		if (this.props.onChange) {
-			this.props.onChange(val);
-		}
-	}
-
-	private onGenericChange(event: any): void {
-		this.onChange(event.target.value);
-	}
-
-	private onDatePickerChange(date: Date): void {
-		this.onChange(date);
-	}
-
-	private onBooleanChange(_: object, checked: boolean): void {
-		this.onChange(checked);
-	}
-
-	private renderEditCheckbox(): JSX.Element {
+	private renderEditCheckbox = (): JSX.Element => {
 		return (
 			<Checkbox checked={this.props.datum} onChange={this.onBooleanChange}/>
 		);
-	}
+	};
 
-	private renderEditSwitch(): JSX.Element {
+	private renderEditSwitch = (): JSX.Element => {
 		return (
 			<Switch checked={this.props.datum} onChange={this.onBooleanChange}/>
 		);
-	}
+	};
 
-	private renderEditDateMode(): JSX.Element {
+	private renderEditDateMode = (): JSX.Element => {
 		return (
 			<DatePicker
 				value={this.props.datum}
@@ -95,9 +68,9 @@ export class GridCell extends React.Component {
 				margin="dense"
 			/>
 		);
-	}
+	};
 
-	private renderEditSelectMode(): JSX.Element {
+	private renderEditSelectMode = (): JSX.Element => {
 		let normalizedOptions: Map<string, any> = this.getNormalizedSelectOptions();
 		const displayTexts = Array.from(normalizedOptions.keys());
 
@@ -106,6 +79,7 @@ export class GridCell extends React.Component {
 				select
 				value={this.getCellText()}
 				onChange={this.onGenericChange}
+				variant="outlined"
 				margin="dense"
 			>
 				{displayTexts.map((display: string) =>
@@ -118,36 +92,38 @@ export class GridCell extends React.Component {
 				)}
 			</TextField>
 		);
-	}
+	};
 
-	private renderEditCurrencyMode(): JSX.Element {
+	private renderEditCurrencyMode = (): JSX.Element => {
 		return (
 			<TextField
 				type={'number'}
 				value={this.props.datum}
 				onChange={this.onGenericChange}
 				fullWidth
+				variant="outlined"
 				margin="dense"
 				InputProps={{
 					startAdornment: <InputAdornment position="start">$</InputAdornment>,
 				}}
 			/>
 		);
-	}
+	};
 
-	private renderEditTextMode(): JSX.Element {
+	private renderEditTextMode = (): JSX.Element => {
 		return (
 			<TextField
 				type={this.props.column.type}
 				value={this.getCellText()}
 				onChange={this.onGenericChange}
 				fullWidth
+				variant="outlined"
 				margin="dense"
 			/>
 		);
-	}
+	};
 
-	private renderEditMode(): JSX.Element {
+	private renderEditMode = (): JSX.Element => {
 		switch (this.props.column.type) {
 			case 'date':
 				return this.renderEditDateMode();
@@ -162,17 +138,47 @@ export class GridCell extends React.Component {
 			default:
 				return this.renderEditTextMode();
 		}
-	}
+	};
 
-	private renderNonEditMode(): JSX.Element {
+	private renderNonEditMode = (): JSX.Element => {
 		return (
 			<React.Fragment>
-				{this.getCellContents()}
+				{this.renderCellContent()}
 			</React.Fragment>
 		);
-	}
+	};
 
-	private getNormalizedSelectOptions(): Map<string, any> {
+	////////////////////
+	// Event Handlers //
+	////////////////////
+
+	private onChange = (val: any): void => {
+		if (this.props.onChange) {
+			this.props.onChange(val);
+		}
+	};
+
+	private onGenericChange = (event: any): void => {
+		this.onChange(event.target.value);
+	};
+
+	private onDatePickerChange = (date: Date): void => {
+		this.onChange(date);
+	};
+
+	private onBooleanChange = (_: object, checked: boolean): void => {
+		this.onChange(checked);
+	};
+
+	// Helpers //
+
+	private getCellText = (): string => {
+		return this.props.column.formatter
+			? this.props.column.formatter(this.props.datum)
+			: this.props.datum.toString();
+	};
+
+	private getNormalizedSelectOptions = (): Map<string, any> => {
 		const options = this.props.column.selectOptions;
 
 		if (options instanceof Map) {
@@ -197,5 +203,5 @@ export class GridCell extends React.Component {
 
 			return normalizedOptions;
 		}
-	}
+	};
 }

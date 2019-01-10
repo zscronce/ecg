@@ -18,7 +18,7 @@ class LoginPage extends React.Component {
 	}
 }
 
-const StyledLoginPage = styled(LoginPage)`
+const styledLoginPage = styled(LoginPage)`
 	height: 100%;
 	width: 100%;
 	display: flex;
@@ -28,5 +28,5 @@ const StyledLoginPage = styled(LoginPage)`
 `;
 
 export {
-	StyledLoginPage as LoginPage,
+	styledLoginPage as LoginPage,
 };

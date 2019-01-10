@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 
-import { Log } from 'src/debug/log';
+import { log } from 'src/debug/log';
 
 export class LoginComponent extends React.Component {
 	constructor(props: any) {
@@ -13,12 +13,12 @@ export class LoginComponent extends React.Component {
 		this.onGoogleFailure = this.onGoogleFailure.bind(this);
 	}
 
-	@Log
+	@log
 	onGoogleSuccess(response: GoogleLoginResponse | GoogleLoginResponseOffline) {
 		// TODO: implement
 	}
 
-	@Log
+	@log
 	onGoogleFailure(response: any) {
 		// TODO: implement
 	}

@@ -5,24 +5,18 @@ import styled from 'styled-components';
 import { theme } from 'src/components/app/mui-theme';
 
 import { NavDrawer } from './nav-drawer';
+import { navDef } from './nav-def';
 
-class Chrome extends React.Component {
-	public constructor(public props: {
-		children?: JSX.Element,
-		className?: string,
-	}) {
-		super(props);
-	}
+type ChromeProps = {
+	children?: JSX.Element,
+	className?: string,
+};
 
+class Chrome extends React.Component<ChromeProps> {
 	public render(): JSX.Element {
 		return (
-			<div
-				className={this.props.className}
-			>
-				<AppBar
-					className="ecg-bar"
-					position="static"
-				>
+			<div className={this.props.className}>
+				<AppBar className="ecg-bar" position="static">
 					<Toolbar>
 						<Typography
 							component="a"
@@ -36,12 +30,8 @@ class Chrome extends React.Component {
 						</Typography>
 					</Toolbar>
 				</AppBar>
-				<div
-					className="ecg-layout"
-				>
-					<NavDrawer
-						dense
-					/>
+				<div className="ecg-layout">
+					<NavDrawer dense definition={navDef}/>
 					<main>
 						{this.props.children}
 					</main>
@@ -51,12 +41,12 @@ class Chrome extends React.Component {
 	}
 }
 
-const StyledChrome = styled(Chrome)`
+const styledChrome = styled(Chrome)`
 	height: 100%;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	
+
 	.thin {
 		font-weight: 200;
 	}
@@ -83,5 +73,5 @@ const StyledChrome = styled(Chrome)`
 `;
 
 export {
-	StyledChrome as Chrome,
+	styledChrome as Chrome,
 };

@@ -31,6 +31,11 @@ export class GridRow<T> extends React.Component {
 			editing: null,
 			edits: [],
 		};
+
+		this.onInputChange = {};
+		this.props.columns.forEach((col: GridColumn) =>
+			this.onInputChange[col.key] = this.onChange.bind(this, col.key),
+		);
 	}
 
 	public render(): JSX.Element {
@@ -68,12 +73,16 @@ export class GridRow<T> extends React.Component {
 						datum={this.state.editing && col.editable
 							? this.state.editing[col.key]
 							: this.props.data[col.key]}
-						onChange={(val: any) => this.onInputChange(col.key, val)}
+						onChange={this.onInputChange[col.key]}
 					/>,
 				)}
 			</TableRow>
 		);
 	}
+
+	private readonly onInputChange: {
+		[colKey: string]: (val: any) => void,
+	};
 
 	private readonly onClickEdit = (): void => {
 		this.setState({
@@ -106,7 +115,7 @@ export class GridRow<T> extends React.Component {
 		});
 	};
 
-	private readonly onInputChange = (propName: string, value: any): void => {
+	private readonly onChange = (propName: string, value: any): void => {
 		const editing = this.state.editing;
 		editing[propName] = value;
 

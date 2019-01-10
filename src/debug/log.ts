@@ -1,4 +1,4 @@
-export const Log = function(
+export const log = function(
 	target: any,
 	methodName: string,
 	descriptor: PropertyDescriptor,

@@ -9,7 +9,7 @@ import { currencyFormatter, dateFormatter } from 'src/components/grid/formatters
 import { exampleEmployees } from 'src/debug/example-employees';
 
 export class EmployeeGrid extends React.Component {
-	private static COLUMNS: GridColumn[] = [
+	public static COLUMNS: GridColumn[] = [
 		new GridColumn({
 			key: 'id',
 			label: 'Name',
@@ -89,12 +89,13 @@ export class EmployeeGrid extends React.Component {
 	}
 
 	private add(): void {
-		const e: Employee = new Employee();
-		e.id = '';
-		e.hireDate = new Date();
-		e.empType = EmployeeType.hourly;
-		e.laborType = LaborType.direct;
-		e.hourlyRate = 0;
+		const e: Employee = new Employee({
+			id: '',
+			hireDate: new Date(),
+			type: EmployeeType.hourly,
+			laborType: LaborType.direct,
+			hourlyRate: 0,
+		});
 
 		this.state.employees.push(e);
 

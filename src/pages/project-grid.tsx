@@ -9,7 +9,7 @@ export class ProjectGridPage extends React.Component {
 		super(props);
 	}
 
-	render(): JSX.Element {
+	public render(): JSX.Element {
 		return (
 			<ProjectGrid projects={exampleProjects}/>
 		);

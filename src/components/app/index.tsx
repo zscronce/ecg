@@ -31,12 +31,12 @@ class App extends React.Component {
 	}
 }
 
-const StyledApp = styled(App)`
+const styledApp = styled(App)`
 	height: 100vh;
 	width: 100vw;
 	position: fixed;
 `;
 
 export {
-	StyledApp as App,
+	styledApp as App,
 };
