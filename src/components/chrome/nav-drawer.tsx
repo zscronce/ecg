@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
 	Collapse,
+	createStyles,
 	Drawer,
 	Icon,
 	IconButton,
@@ -10,20 +11,29 @@ import {
 	ListItemIcon,
 	ListItemText,
 	Tooltip,
+	withStyles,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import styled from 'styled-components';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import classNames from 'classnames';
 
-import { theme } from 'src/components/app/mui-theme';
-
 import { NavGroup, NavLink } from './nav-def';
+
+import { theme } from 'src/components/app/mui-theme';
 
 type NavDrawerProps = {
 	dense?: boolean;
 	accordion?: boolean;
-	className?: boolean;
+	classes: {
+		root: string,
+		expanded: string,
+		paper: string,
+		expander: string,
+		sublist: string,
+		nowrap: string,
+		toggle: string,
+		flip: string,
+	},
 	definition: NavGroup[];
 };
 
@@ -38,32 +48,30 @@ class NavDrawer extends React.Component<NavDrawerProps, NavDrawerState> {
 		openIndeces: [],
 	};
 
-	public componentDidUpdate(prevProps: NavDrawerProps): void {
-		const prevDef = prevProps.definition;
+	public componentWillMount(): void {
+		this.cacheListeners();
+	}
 
-		if (prevDef !== this.props.definition || prevDef.length !== this.props.definition.length) {
-			this.onClickListeners = this.props.definition.map((_: NavGroup, idx: number) =>
-				this.onClick.bind(this, idx),
-			);
+	public componentDidUpdate(prevProps: NavDrawerProps): void {
+		if (prevProps.definition.length !== this.props.definition.length) {
+			this.cacheListeners();
 		}
 	}
 
 	public render = (): JSX.Element => {
-		this.props.definition.forEach((_: NavGroup, idx: number) =>
-			this.onClickListeners[idx] = this.onClickListeners[idx] || this.onClick.bind(this, idx),
-		);
+		const cl = this.props.classes;
 
 		return (
 			<Drawer
 				variant="permanent"
 				open={this.state.open}
-				className={classNames(this.props.className, {open: this.state.open})}
-				PaperProps={{className: 'paper', elevation: 4}}
+				className={classNames(cl.root, {[cl.expanded]: this.state.open})}
+				PaperProps={{className: cl.paper, elevation: 4}}
 			>
 				<List component="nav" dense={this.props.dense}>
 					{this.props.definition.map((group: NavGroup, idx: number) =>
-						<>
-							<ListItem key={group.label} button onClick={this.onClickListeners[idx]}>
+						<React.Fragment key={group.label}>
+							<ListItem button onClick={this.onClickListeners[idx]}>
 								<ListItemIcon>
 									<Icon>
 										{group.icon}
@@ -71,19 +79,19 @@ class NavDrawer extends React.Component<NavDrawerProps, NavDrawerState> {
 								</ListItemIcon>
 								<ListItemText primary={group.label} primaryTypographyProps={{ noWrap: true }}/>
 								{group.sub
-									? <ExpandMoreIcon className={classNames('expand', {open: this.isOpen(idx)})}/>
+									? <ExpandMoreIcon className={classNames(cl.expander, {[cl.flip]: this.isOpen(idx)})}/>
 									: null
 								}
 							</ListItem>
 							{group.sub && group.sub.length
 								? (
-									<Collapse in={this.isOpen(idx)}>
+									<Collapse key={`${group.label}-sub`} in={this.state.open && this.isOpen(idx)}>
 										<List dense={this.props.dense}>
 											{group.sub.map((link: NavLink) =>
 												<ListItem
 													key={link.label}
 													component={Link}
-													className="sublist"
+													className={cl.sublist}
 													selected={link.href === window.location.pathname}
 													{...{to: link.href}}
 												>
@@ -100,26 +108,29 @@ class NavDrawer extends React.Component<NavDrawerProps, NavDrawerState> {
 								)
 								: null
 							}
-						</>,
+						</React.Fragment>,
 					)}
 				</List>
-				{this.state.open
-					? (
-						<Tooltip title="Minimize" placement="left">
-							<IconButton onClick={this.closeMenu} className="close">
-								<ChevronLeftIcon/>
-							</IconButton>
-						</Tooltip>
-					)
-					: null
-				}
+				<Tooltip title={this.state.open ? 'Minimize' : 'Open'} placement="top-start">
+					<IconButton onClick={this.toggleMenu} className={classNames(cl.toggle, {[cl.flip]: this.state.open})}>
+						<ChevronRightIcon/>
+					</IconButton>
+				</Tooltip>
 			</Drawer>
 		);
 	};
 
 	private onClickListeners: Array<() => void> = [];
 
-	private isOpen = (idx: number): boolean => this.state.openIndeces.indexOf(idx) !== -1;
+	private isOpen = (idx: number): boolean => {
+		return this.state.openIndeces.indexOf(idx) !== -1;
+	};
+
+	private cacheListeners() {
+		this.onClickListeners = this.props.definition.map((_: NavGroup, idx: number) =>
+			this.onClick.bind(this, idx),
+		);
+	}
 
 	private onClick = (idx: number): void => {
 		if (this.isOpen(idx)) {
@@ -139,50 +150,48 @@ class NavDrawer extends React.Component<NavDrawerProps, NavDrawerState> {
 		}
 	};
 
-	private closeMenu = (): void => this.setState({open: false, openIndeces: []});
+	private toggleMenu = (): void => {
+		this.setState({
+			open: !this.state.open,
+		});
+	};
 }
 
-const styledNavDrawer = styled(NavDrawer)`
-	width: ${theme.spacing.unit * 9 + 1}px;
-	transition-property: width;
-	transition-duration: ${theme.transitions.duration.leavingScreen}ms;
-	transition-timing-function: ${theme.transitions.easing.sharp};
-
-	&.open {
-		width: 240px;
-		transition-property: width;
-		transition-duration: ${theme.transitions.duration.enteringScreen}ms;
-		transition-timing-function: ${theme.transitions.easing.sharp};
-	}
-
-	.paper {
-		position: relative;
-		overflow-x: hidden;
-		height: 100%;
-	}
-
-	.expand {
-		transition: ${theme.transitions.duration.standard}ms ${theme.transitions.easing.sharp};
-	}
-
-	.expand.open {
-		transform: rotate(180deg);
-	}
-
-	.sublist {
-		padding-left: ${theme.spacing.unit * 4}px;
-	}
-
-	.nowrap {
-		white-space: nowrap;
-	}
-
-	.close {
-		position: absolute;
-		bottom: ${theme.spacing.unit}px;
-		right: ${theme.spacing.unit}px;
-	}
-`;
+const styledNavDrawer = withStyles(createStyles({
+	root: {
+		width: 9 * theme.spacing.unit + 1,
+		transitionProperty: 'width',
+		transitionDuration: `${theme.transitions.duration.leavingScreen}ms`,
+		transitionTimingFunction: theme.transitions.easing.sharp,
+	},
+	expanded: {
+		width: 240,
+	},
+	paper: {
+		position: 'relative',
+		overflowX: 'hidden',
+		height: '100%',
+	},
+	expander: {
+		transition: `${theme.transitions.duration.standard}ms ${theme.transitions.easing.sharp}`,
+	},
+	sublist: {
+		paddingLeft: 4 * theme.spacing.unit,
+	},
+	nowrap: {
+		whiteSpace: 'nowrap',
+	},
+	toggle: {
+		position: 'absolute',
+		bottom: theme.spacing.unit,
+		right: theme.spacing.unit,
+		transitionDuration: `${theme.transitions.duration.standard}`,
+		transitionTimingFunction: theme.transitions.easing.sharp,
+	},
+	flip: {
+		transform: 'rotate(180deg)',
+	},
+}))(NavDrawer);
 
 export {
 	styledNavDrawer as NavDrawer,

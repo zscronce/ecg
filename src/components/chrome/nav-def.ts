@@ -11,6 +11,27 @@ export type NavGroup = NavEntry & {
 
 export const navDef: NavGroup[] = [
 	{
+		label: 'Data Entry',
+		icon: 'list',
+		sub: [
+			{
+				label: 'Employees',
+				icon: 'people',
+				href: '/employees',
+			},
+			{
+				label: 'Contractors',
+				icon: 'people_outline',
+				href: '/contractors',
+			},
+			{
+				label: 'Projects',
+				icon: 'class',
+				href: '/projects',
+			},
+		],
+	},
+	{
 		label: 'Account',
 		icon: 'account_balance',
 		sub: [

@@ -1,31 +1,34 @@
-import Card from '@material-ui/core/Card';
+import { Card, createStyles, withStyles } from '@material-ui/core';
 import React from 'react';
-import styled from 'styled-components';
 
-import { LoginComponent } from '../components/login';
+import { LoginComponent } from 'src/components/login';
 
-class LoginPage extends React.Component {
-	constructor(props: any) {
-		super(props);
-	}
+export type LoginPageProps = {
+	classes: {
+		root: string,
+	},
+};
 
+class LoginPage extends React.Component<LoginPageProps> {
 	public render(): JSX.Element {
 		return (
-			<Card {...this.props}>
+			<Card className={this.props.classes.root}>
 				<LoginComponent/>
 			</Card>
 		);
 	}
 }
 
-const styledLoginPage = styled(LoginPage)`
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-`;
+const styledLoginPage = withStyles(createStyles({
+	root: {
+		height: '100%',
+		width: '100%',
+		display: 'flex',
+		justifyContent: 'center',
+		alignContent: 'center',
+		alignItems: 'center',
+	},
+}))(LoginPage);
 
 export {
 	styledLoginPage as LoginPage,

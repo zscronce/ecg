@@ -1,6 +1,5 @@
 import React from 'react';
 import { Checkbox, InputAdornment, MenuItem, Switch, TableCell, TextField } from '@material-ui/core';
-import { DatePicker } from 'material-ui-pickers';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import ToggleOffIcon from '@material-ui/icons/ToggleOff';
@@ -8,23 +7,16 @@ import ToggleOnIcon from '@material-ui/icons/ToggleOn';
 
 import { GridColumn } from './index';
 
-type GridCellPropTypes = {
+export class GridCell extends React.Component<{
 	column: GridColumn,
 	datum: any,
 	editing: boolean,
 	onChange: Function,
-};
-
-export class GridCell extends React.Component<GridCellPropTypes> {
+}> {
 	public render = (): JSX.Element => {
 		return (
-			<TableCell
-				numeric={this.props.column.isNumeric}
-			>
-				{this.props.editing
-					? this.renderEditMode()
-					: this.renderNonEditMode()
-				}
+			<TableCell onFocu align={this.props.column.isNumeric ? 'right' : 'inherit'}>
+				{this.props.editing ? this.renderEditMode() : this.renderNonEditMode()}
 			</TableCell>
 		);
 	};
@@ -62,9 +54,10 @@ export class GridCell extends React.Component<GridCellPropTypes> {
 
 	private renderEditDateMode = (): JSX.Element => {
 		return (
-			<DatePicker
+			<TextField
+				type="date"
 				value={this.props.datum}
-				onChange={this.onDatePickerChange}
+				onChange={this.onGenericChange}
 				margin="dense"
 			/>
 		);
@@ -72,21 +65,11 @@ export class GridCell extends React.Component<GridCellPropTypes> {
 
 	private renderEditSelectMode = (): JSX.Element => {
 		let normalizedOptions: Map<string, any> = this.getNormalizedSelectOptions();
-		const displayTexts = Array.from(normalizedOptions.keys());
 
 		return (
-			<TextField
-				select
-				value={this.getCellText()}
-				onChange={this.onGenericChange}
-				variant="outlined"
-				margin="dense"
-			>
-				{displayTexts.map((display: string) =>
-					<MenuItem
-						key={display}
-						value={normalizedOptions.get(display)}
-					>
+			<TextField select value={this.getCellText()} onChange={this.onGenericChange} variant="outlined" margin="dense">
+				{Array.from(normalizedOptions.keys()).map((display: string) =>
+					<MenuItem key={display} value={normalizedOptions.get(display)}>
 						{display}
 					</MenuItem>,
 				)}
@@ -162,10 +145,6 @@ export class GridCell extends React.Component<GridCellPropTypes> {
 		this.onChange(event.target.value);
 	};
 
-	private onDatePickerChange = (date: Date): void => {
-		this.onChange(date);
-	};
-
 	private onBooleanChange = (_: object, checked: boolean): void => {
 		this.onChange(checked);
 	};
@@ -191,7 +170,7 @@ export class GridCell extends React.Component<GridCellPropTypes> {
 					(opt: string) => normalizedOptions.set(opt, opt),
 				);
 			} else if (options instanceof Object) {
-				Object.getOwnPropertyNames(options)
+				Object.keys(options)
 					.forEach(
 						(key: string) => normalizedOptions.set(key, options[key]),
 					);
