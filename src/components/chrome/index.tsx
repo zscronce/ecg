@@ -1,10 +1,10 @@
 import React from 'react';
-import { AppBar, createStyles, Toolbar, Typography, withStyles } from '@material-ui/core';
+import {AppBar, createStyles, Toolbar, Typography, withStyles} from '@material-ui/core';
 
-import { NavDrawer } from './nav-drawer';
-import { navDef } from './nav-def';
+import {NavDrawer} from './nav-drawer';
+import {navDef} from './nav-def';
 
-import { theme } from 'src/components/app/mui-theme';
+import {theme} from 'src/components/app/mui-theme';
 
 type ChromeProps = {
 	children?: JSX.Element,
@@ -31,7 +31,7 @@ class Chrome extends React.Component<ChromeProps> {
 							color="inherit"
 							className={cl.logo}
 							noWrap
-							{...{ href: '/' }}
+							{...{href: '/'}}
 						>
 							ECG<span className={cl.thin}>INC</span>
 						</Typography>

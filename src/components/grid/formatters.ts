@@ -1,6 +1,6 @@
-import { DayOfWeek, getDayOfWeekName } from 'src/models/day-of-week';
-import { getMonthName, Month } from 'src/models/month';
-import { Primitive } from '../../models/primitive';
+import {DayOfWeek, getDayOfWeekName} from 'src/models/day-of-week';
+import {getMonthName, Month} from 'src/models/month';
+import {Primitive} from 'src/models/primitive';
 
 const currencyFormat = new Intl.NumberFormat('en-US', {
 	style: 'currency',

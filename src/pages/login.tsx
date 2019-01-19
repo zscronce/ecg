@@ -1,7 +1,7 @@
-import { Card, createStyles, withStyles } from '@material-ui/core';
+import {Card, createStyles, withStyles} from '@material-ui/core';
 import React from 'react';
 
-import { LoginComponent } from 'src/components/login';
+import {LoginComponent} from 'src/components/login';
 
 export type LoginPageProps = {
 	classes: {

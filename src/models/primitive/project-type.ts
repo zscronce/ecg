@@ -1,4 +1,4 @@
-import { Primitive } from './';
+import {Primitive} from './';
 
 export class ProjectType extends Primitive {
 	static project = new Primitive('project', 'Project', 'From a Project');

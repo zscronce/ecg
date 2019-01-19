@@ -1,7 +1,7 @@
 import React from 'react';
-import { CssBaseline, createStyles, MuiThemeProvider, withStyles } from '@material-ui/core';
+import {createStyles, CssBaseline, MuiThemeProvider, withStyles} from '@material-ui/core';
 
-import { theme } from './mui-theme';
+import {theme} from './mui-theme';
 
 /**
  * @description renders react providers around its children

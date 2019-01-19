@@ -1,5 +1,5 @@
 import React from 'react';
-import { EmployeeGrid } from 'src/components/grid/model-types/employee';
+import {EmployeeGrid} from 'src/components/grid/model-types/employee';
 
 export class EmployeeGridPage extends React.Component {
 	constructor(props: any) {

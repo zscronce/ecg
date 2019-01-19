@@ -1,5 +1,5 @@
-import { LaborType } from './primitive/labor-type';
-import { EmployeeType } from './primitive/employee-type';
+import {LaborType} from './primitive/labor-type';
+import {EmployeeType} from './primitive/employee-type';
 
 export class Employee {
 	public static RAISE_RATE: number = 0.02;
@@ -12,8 +12,20 @@ export class Employee {
 	public type?: EmployeeType;
 	public laborType?: LaborType;
 
+	public constructor(args?: {
+		id?: string,
+		hireDate?: Date,
+		type?: EmployeeType,
+		laborType?: LaborType,
+		hourlyRate?: number,
+	}) {
+		Object.assign(this, args);
+	}
+
 	public get hourlyRateWithRaise(): number {
-		return Employee.roundDollars(this.hourlyRate * (1 + Employee.RAISE_RATE));
+		return Employee.roundDollars(this.hourlyRate * (
+			1 + Employee.RAISE_RATE
+		));
 	}
 
 	public set hourlyRateWithRaise(r: number) {
@@ -41,7 +53,9 @@ export class Employee {
 	}
 
 	public set biWeeklyRate(r: number) {
-		this._hourlyRate = r / (2 * Employee.HOURS_PER_WEEK);
+		this._hourlyRate = r / (
+			2 * Employee.HOURS_PER_WEEK
+		);
 	}
 
 	public get hourlyRate(): number {
@@ -50,16 +64,6 @@ export class Employee {
 
 	public set hourlyRate(r: number) {
 		this._hourlyRate = r;
-	}
-
-	public constructor(args?: {
-		id?: string,
-		hireDate?: Date,
-		type?: EmployeeType,
-		laborType?: LaborType,
-		hourlyRate?: number,
-	}) {
-		Object.assign(this, args);
 	}
 
 	private static roundDollars(n: number): number {

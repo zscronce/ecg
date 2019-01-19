@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {
 	Collapse,
 	createStyles,
@@ -17,9 +17,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import classNames from 'classnames';
 
-import { NavGroup, NavLink } from './nav-def';
+import {NavGroup, NavLink} from './nav-def';
 
-import { theme } from 'src/components/app/mui-theme';
+import {theme} from 'src/components/app/mui-theme';
 
 type NavDrawerProps = {
 	dense?: boolean;
@@ -77,7 +77,7 @@ class NavDrawer extends React.Component<NavDrawerProps, NavDrawerState> {
 										{group.icon}
 									</Icon>
 								</ListItemIcon>
-								<ListItemText primary={group.label} primaryTypographyProps={{ noWrap: true }}/>
+								<ListItemText primary={group.label} primaryTypographyProps={{noWrap: true}}/>
 								{group.sub
 									? <ExpandMoreIcon className={classNames(cl.expander, {[cl.flip]: this.isOpen(idx)})}/>
 									: null

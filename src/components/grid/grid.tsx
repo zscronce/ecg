@@ -1,10 +1,9 @@
 import React from 'react';
-import { IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import {IconButton, Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-// import styled from 'styled-components';
 
-import { GridColumn } from './index';
-import { GridRow } from './row';
+import {GridColumn} from './index';
+import {GridRow} from './row';
 
 export type GridProps = {
 	data: object[];

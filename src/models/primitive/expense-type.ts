@@ -1,4 +1,4 @@
-import { Primitive } from './';
+import {Primitive} from './';
 
 export class ExpenseType extends Primitive {
 	static dl = new ExpenseType('DL');

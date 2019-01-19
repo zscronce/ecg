@@ -1,4 +1,4 @@
-import { Primitive } from 'src/models/primitive';
+import {Primitive} from 'src/models/primitive';
 
 /**
  * @class GridColumn

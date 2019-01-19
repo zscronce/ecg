@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, ListItemText } from '@material-ui/core';
+import {List, ListItem, ListItemText} from '@material-ui/core';
 
 export class PrimitiveList extends React.Component {
 	public props: {

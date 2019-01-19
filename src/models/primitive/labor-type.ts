@@ -1,4 +1,4 @@
-import { Primitive } from './';
+import {Primitive} from './';
 
 export class LaborType extends Primitive {
 	static direct = new LaborType(

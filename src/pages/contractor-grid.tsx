@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ContractorGrid } from 'src/components/grid/model-types/contractor';
-import { exampleContractors } from 'src/debug/example-contractors';
+import {ContractorGrid} from 'src/components/grid/model-types/contractor';
+import {exampleContractors} from 'src/debug/example-contractors';
 
 export class ContractorGridPage extends React.Component {
 	constructor(public props: {}) {

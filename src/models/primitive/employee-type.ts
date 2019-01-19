@@ -1,4 +1,4 @@
-import { Primitive } from './';
+import {Primitive} from './';
 
 export class EmployeeType extends Primitive {
 	static salary = new EmployeeType(

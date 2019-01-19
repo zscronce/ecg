@@ -1,11 +1,11 @@
 import React from 'react';
-import { Checkbox, InputAdornment, MenuItem, Switch, TableCell, TextField } from '@material-ui/core';
+import {Checkbox, InputAdornment, MenuItem, Switch, TableCell, TextField} from '@material-ui/core';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import ToggleOffIcon from '@material-ui/icons/ToggleOff';
 import ToggleOnIcon from '@material-ui/icons/ToggleOn';
 
-import { GridColumn } from './index';
+import {GridColumn} from './index';
 
 export class GridCell extends React.Component<{
 	column: GridColumn,
@@ -13,13 +13,11 @@ export class GridCell extends React.Component<{
 	editing: boolean,
 	onChange: Function,
 }> {
-	public render = (): JSX.Element => {
-		return (
-			<TableCell onFocu align={this.props.column.isNumeric ? 'right' : 'inherit'}>
-				{this.props.editing ? this.renderEditMode() : this.renderNonEditMode()}
-			</TableCell>
-		);
-	};
+	public render = (): JSX.Element => (
+		<TableCell align={this.props.column.isNumeric ? 'right' : 'inherit'}>
+			{this.props.editing ? this.renderEditMode() : this.renderNonEditMode()}
+		</TableCell>
+	);
 
 	//////////////////////
 	// render() helpers //
@@ -28,13 +26,9 @@ export class GridCell extends React.Component<{
 	private renderCellContent = (): JSX.Element => {
 		switch (this.props.column.type) {
 			case 'checkbox':
-				return this.props.datum
-					? <CheckBoxIcon/>
-					: <CheckBoxOutlineBlankIcon/>;
+				return this.props.datum ? <CheckBoxIcon/> : <CheckBoxOutlineBlankIcon/>;
 			case 'switch':
-				return this.props.datum
-					? <ToggleOnIcon/>
-					: <ToggleOffIcon/>;
+				return this.props.datum ? <ToggleOnIcon/> : <ToggleOffIcon/>;
 			default:
 				return <>{this.getCellText()}</>;
 		}

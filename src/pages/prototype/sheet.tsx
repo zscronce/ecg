@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableFooter,
-	TableHead,
-	TableRow,
-} from '@material-ui/core';
+import {Table, TableBody, TableCell, TableFooter, TableHead, TableRow} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import withStyles from '@material-ui/core/styles/withStyles';
 import createStyles from '@material-ui/core/styles/createStyles';

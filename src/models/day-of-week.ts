@@ -1,13 +1,13 @@
-import { format, setDay } from 'date-fns';
+import {format, setDay} from 'date-fns';
 
 export enum DayOfWeek {
-	Sunday = 0,
-	Monday = 1,
-	Tuesday = 2,
-	Wednesday = 3,
-	Thursday = 4,
-	Friday = 5,
-	Saturday = 6,
+	sunday = 0,
+	monday = 1,
+	tuesday = 2,
+	wednesday = 3,
+	thursday = 4,
+	friday = 5,
+	saturday = 6,
 }
 
 export function getDayOfWeekName(day: DayOfWeek): string {

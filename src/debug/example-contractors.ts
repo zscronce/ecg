@@ -1,5 +1,5 @@
-import { Contractor } from 'src/models/contractor';
-import { LaborType } from 'src/models/primitive/labor-type';
+import {Contractor} from 'src/models/contractor';
+import {LaborType} from 'src/models/primitive/labor-type';
 
 export const exampleContractors: Contractor[] = [
 	new Contractor({

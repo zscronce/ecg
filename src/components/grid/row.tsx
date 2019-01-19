@@ -1,14 +1,14 @@
 import React from 'react';
-import { IconButton, TableCell, TableRow, Typography } from '@material-ui/core';
+import {IconButton, TableCell, TableRow, Typography} from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 
-import { GridColumn } from './column';
-import { GridCell } from './cell';
+import {GridColumn} from './column';
+import {GridCell} from './cell';
 
-import { cloneClassObject } from 'src/util/clone-class-object';
+import {cloneClassObject} from 'src/util/clone-class-object';
 
 export class GridRow<T> extends React.Component {
 	public state: {
@@ -86,7 +86,7 @@ export class GridRow<T> extends React.Component {
 
 	private readonly onClickEdit = (): void => {
 		this.setState({
-			editing: cloneClassObject(this.props.data as T & { constructor: { new(): T } }),
+			editing: cloneClassObject(this.props.data as T & {constructor: {new(): T}}),
 			edits: [],
 		});
 	};
@@ -99,7 +99,7 @@ export class GridRow<T> extends React.Component {
 
 	private readonly onClickSave = (): void => {
 		this.state.edits.forEach(
-			(edit: { propName: string, value: any }) => this.props.data[edit.propName] = edit.value,
+			(edit: {propName: string, value: any}) => this.props.data[edit.propName] = edit.value,
 		);
 
 		this.setState({
@@ -120,9 +120,9 @@ export class GridRow<T> extends React.Component {
 		editing[propName] = value;
 
 		const edits = this.state.edits;
-		edits.push({ propName, value });
+		edits.push({propName, value});
 
 		// Make sure react sees the above changes
-		this.setState({ editing, edits });
+		this.setState({editing, edits});
 	};
 }

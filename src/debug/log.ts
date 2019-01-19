@@ -1,8 +1,8 @@
-export const log = function(
+export const log = (
 	target: any,
 	methodName: string,
 	descriptor: PropertyDescriptor,
-): PropertyDescriptor {
+): PropertyDescriptor => {
 	if (descriptor.value instanceof Function) {
 		const method = descriptor.value;
 		descriptor.value = function(...args: any[]): any {

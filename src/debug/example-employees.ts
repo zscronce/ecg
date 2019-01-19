@@ -1,6 +1,6 @@
-import { Employee } from 'src/models/employee';
-import { EmployeeType } from 'src/models/primitive/employee-type';
-import { LaborType } from 'src/models/primitive/labor-type';
+import {Employee} from 'src/models/employee';
+import {EmployeeType} from 'src/models/primitive/employee-type';
+import {LaborType} from 'src/models/primitive/labor-type';
 
 const zach = new Employee({
 	id: 'Zach',

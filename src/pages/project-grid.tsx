@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ProjectGrid } from 'src/components/grid/model-types/project';
+import {ProjectGrid} from 'src/components/grid/model-types/project';
 
-import { exampleProjects } from 'src/debug/example-projects';
+import {exampleProjects} from 'src/debug/example-projects';
 
 export class ProjectGridPage extends React.Component {
 	constructor(public props: {}) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, TableBody, TableHead, TableFooter, TableRow, TableCell } from '@material-ui/core'
+import {Table, TableBody, TableCell, TableFooter, TableHead, TableRow} from '@material-ui/core';
 
 type GridProps<T> = {
 	list: T[];
@@ -15,7 +15,7 @@ type GridProps<T> = {
 };
 
 export default class Grid<T> extends React.Component<GridProps<T>> {
-	constructor(props:  GridProps<T>) {
+	constructor(props: GridProps<T>) {
 		super(props);
 	}
 
@@ -30,15 +30,22 @@ export default class Grid<T> extends React.Component<GridProps<T>> {
 				</TableRow>
 			</TableHead>
 			<TableBody className={this.props.classes.body}>
-				{this.props.list.map((item: T, i: number) =>
+				{this.props.list.map((item: T, i: number) => (
 					<TableRow className={this.props.classes.row} key={i}>
 						<TableCell className={this.props.classes.cell} variant="head">1</TableCell>
 						<TableCell className={this.props.classes.cell}>
 							<input type="text" className={this.props.classes.textInput}/>
 						</TableCell>
 					</TableRow>
-				)}
+				))}
 			</TableBody>
+			<TableFooter className={this.props.classes.footer}>
+				<TableRow className={this.props.classes.row}>
+					<TableCell className={this.props.classes.cell}>
+						{JSON.stringify(this.props.list)}
+					</TableCell>
+				</TableRow>
+			</TableFooter>
 		</Table>
 	);
 }

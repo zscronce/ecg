@@ -1,4 +1,4 @@
-import { LaborType } from 'src/models/primitive/labor-type';
+import {LaborType} from 'src/models/primitive/labor-type';
 
 export class Contractor {
 	public id?: string;

@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Employee } from 'src/models/employee';
-import { EmployeeType } from 'src/models/primitive/employee-type';
-import { LaborType } from 'src/models/primitive/labor-type';
-import { Grid, GridColumn } from 'src/components/grid';
-import { currencyFormatter, dateFormatter } from 'src/components/grid/formatters';
+import {Employee} from 'src/models/employee';
+import {EmployeeType} from 'src/models/primitive/employee-type';
+import {LaborType} from 'src/models/primitive/labor-type';
+import {Grid, GridColumn} from 'src/components/grid';
+import {currencyFormatter, dateFormatter} from 'src/components/grid/formatters';
 
-import { exampleEmployees } from 'src/debug/example-employees';
+import {exampleEmployees} from 'src/debug/example-employees';
 
 export class EmployeeGrid extends React.Component {
 	public static COLUMNS: GridColumn[] = [
@@ -71,7 +71,7 @@ export class EmployeeGrid extends React.Component {
 	constructor(public props: any) {
 		super(props);
 
-		this.state = { employees: exampleEmployees };
+		this.state = {employees: exampleEmployees};
 
 		this.add = this.add.bind(this);
 		this.delete = this.delete.bind(this);

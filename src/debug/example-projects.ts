@@ -1,6 +1,6 @@
-import { Project } from 'src/models/project';
-import { ProjectType } from 'src/models/primitive/project-type';
-import { ExpenseType } from 'src/models/primitive/expense-type';
+import {Project} from 'src/models/project';
+import {ProjectType} from 'src/models/primitive/project-type';
+import {ExpenseType} from 'src/models/primitive/expense-type';
 
 export const exampleProjects: Project[] = [
 	new Project({
