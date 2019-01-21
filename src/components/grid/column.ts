@@ -11,22 +11,12 @@ import {Primitive} from 'src/models/primitive';
  * @property {{[name: string]: any}} [selectOptions]
  */
 export class GridColumn {
-	public static DEFAULT_FORMATTER(value: any): string {
-		try {
-			return value.toString();
-		} catch {
-			return '';
-		}
-	}
-
 	public key: string = '';
 	public type: string = 'text';
 	public label: string = '';
 	public editable: boolean = true;
-	public formatter?: (value: any) => string = GridColumn.DEFAULT_FORMATTER;
-	public selectOptions?: {
-		[_: string]: any,
-	};
+	public formatter?: (value: any) => string = GridColumn.defaultFormatter;
+	public selectOptions?: {value: string, label: string}[];
 
 	constructor(args: {
 		key: string,
@@ -41,5 +31,13 @@ export class GridColumn {
 
 	public get isNumeric(): boolean {
 		return this.type === 'number' || this.type === 'currency';
+	}
+
+	private static defaultFormatter = (value: any): string => {
+		try {
+			return value.toString();
+		} catch {
+			return '';
+		}
 	}
 }
